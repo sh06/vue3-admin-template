@@ -9,7 +9,10 @@ module.exports = {
     { value: 'refactor', name: 'refactor:  重构（既不是修 bug ，也不是加功能）' },
     { value: 'perf', name: 'perf:      性能优化' },
     { value: 'test', name: 'test:      测试相关' },
-    { value: 'build', name: 'build:     构建流程、外部依赖变更，比如升级 npm 包、修改 webpack 配置等' },
+    {
+      value: 'build',
+      name: 'build:     构建流程、外部依赖变更，比如升级 npm 包、修改 Vite 配置等'
+    },
     { value: 'ci', name: 'ci:        ci 相关的更改' }
   ],
   // 生成 feat: 这种
