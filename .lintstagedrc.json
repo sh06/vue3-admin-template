@@ -1,6 +1,6 @@
 {
   "*.html": ["stylelint --fix", "prettier --write"],
-  "*.vue": ["stylelint --fix", "eslint --fix", "prettier --write"],
+  "*.vue": ["stylelint --fix", "eslint -c .eslintrc.js --fix", "prettier --write"],
   "*.{css, scss}": ["stylelint --fix", "prettier --write"],
-  "*.{js,jsx,cjs,mjs,ts,cts,mts}": ["eslint --fix", "prettier --write"]
+  "*.{js,jsx,cjs,mjs,ts,cts,mts}": ["eslint -c .eslintrc.js --fix", "prettier --write"]
 }

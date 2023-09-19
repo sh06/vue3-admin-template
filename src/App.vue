@@ -7,8 +7,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
+  <ul>
+    <li><RouterLink to="/">dashboard</RouterLink></li>
+    <li><RouterLink to="/login">login</RouterLink></li>
+    <li><RouterLink to="/error/403">403</RouterLink></li>
+    <li><RouterLink to="/error/404">404</RouterLink></li>
+    <li><RouterLink to="/error/500">500</RouterLink></li>
+  </ul>
 
   <RouterView />
 </template>
