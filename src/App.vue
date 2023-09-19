@@ -8,7 +8,8 @@ onMounted(() => {
 
 <template>
   <ul>
-    <li><RouterLink to="/">dashboard</RouterLink></li>
+    <li><RouterLink to="/">home</RouterLink></li>
+    <li><RouterLink to="/dashboard">dashboard</RouterLink></li>
     <li><RouterLink to="/login">login</RouterLink></li>
     <li><RouterLink to="/error/403">403</RouterLink></li>
     <li><RouterLink to="/error/404">404</RouterLink></li>
