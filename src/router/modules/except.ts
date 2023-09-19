@@ -1,4 +1,4 @@
-export const exceptRoute = [
+export default [
   {
     path: '/login',
     name: 'login',

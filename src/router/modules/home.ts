@@ -1,4 +1,4 @@
-export const homeRoute = {
+export default {
   path: '/',
   name: 'home',
   redirect: '/dashboard',

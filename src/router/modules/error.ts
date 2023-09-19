@@ -1,4 +1,4 @@
-export const errorRoute = {
+export default {
   path: '/error',
   redirect: '/error/403',
   children: [

@@ -1,13 +1,21 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import exceptRoute from './modules/except'
 
-import { errorRoute } from './modules/error'
-import { exceptRoute } from './modules/except'
-import { homeRoute } from './modules/home'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const modules: Record<string, any> = import.meta.glob(
+  ['./modules/**/*.ts', '!./modules/**/except.ts'],
+  {
+    eager: true
+  }
+)
 
 let routes: RouteRecordRaw[] = []
-routes = routes.concat(errorRoute)
+
+Object.keys(modules).forEach((key) => {
+  routes.push(modules[key].default)
+})
+
 routes = routes.concat(...exceptRoute)
-routes = routes.concat(homeRoute)
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
