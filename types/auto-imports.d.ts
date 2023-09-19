@@ -61,6 +61,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
+  // prettier-ignore
   export type {
     Component,
     ComponentPublicInstance,
