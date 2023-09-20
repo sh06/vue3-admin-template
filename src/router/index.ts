@@ -1,7 +1,6 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import exceptRoute from './modules/except'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const modules: Record<string, any> = import.meta.glob(
   ['./modules/**/*.ts', '!./modules/**/except.ts'],
   {
@@ -9,7 +8,7 @@ const modules: Record<string, any> = import.meta.glob(
   }
 )
 
-let routes: RouteRecordRaw[] = []
+let routes: any[] = []
 
 Object.keys(modules).forEach((key) => {
   routes.push(modules[key].default)

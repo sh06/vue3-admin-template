@@ -1,3 +1,5 @@
+import type { RouteConfig } from 'types/router'
+
 export default {
   path: '/error',
   redirect: '/error/403',
@@ -18,4 +20,4 @@ export default {
       component: () => import('@/views/error/500.vue')
     }
   ]
-}
+} as RouteConfig

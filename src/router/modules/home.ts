@@ -1,3 +1,5 @@
+import type { RouteConfig } from 'types/router'
+
 export default {
   path: '/',
   name: 'home',
@@ -9,4 +11,4 @@ export default {
       component: () => import('@/views/dashboard/index.vue')
     }
   ]
-}
+} as RouteConfig

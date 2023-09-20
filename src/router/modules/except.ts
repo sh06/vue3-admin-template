@@ -1,3 +1,5 @@
+import type { RouteConfig } from 'types/router'
+
 export default [
   {
     path: '/login',
@@ -9,4 +11,4 @@ export default [
     redirect: '/error/404',
     name: 'Any'
   }
-]
+] as Array<RouteConfig>
