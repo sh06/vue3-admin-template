@@ -4,3 +4,4 @@ node_modules
 .idea
 .vscode
 public
+types/auto-imports.d.ts
