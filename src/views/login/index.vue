@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { login } from '@/api/auth'
+import type { loginData } from '@/api/auth/type'
 import type { FormInstance } from 'element-plus'
+import { useUserStore } from '@/stores/modules/user'
+import router from '@/router'
 
 interface LoginForm {
   username: string
@@ -19,10 +21,24 @@ const loginFormRules = {
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 }
 
+let userStore = useUserStore()
+
+if (userStore.token) {
+  router.push('/')
+}
+
 const doLogin = (formEl: FormInstance) => {
   formEl.validate((valid) => {
     if (valid) {
-      login(loginForm)
+      const data: loginData = {
+        username: loginForm.username,
+        password: loginForm.password
+      }
+      userStore.userLogin(data).then((res) => {
+        if (res.code == 1) {
+          router.push('/')
+        }
+      })
     }
   })
 }

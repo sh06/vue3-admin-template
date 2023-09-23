@@ -1,10 +1,10 @@
 import http from '@/utils/http'
-import type { loginForm, loginResponseData } from './type'
+import type { loginData, loginResponseData } from './type'
 
 enum API {
   LOGIN_URL = '/login'
 }
 
-export const login = (data: loginForm) => {
-  http.post<string, loginResponseData>(API.LOGIN_URL, data)
+export const reqLogin = (data: loginData) => {
+  return http.post<string, loginResponseData>(API.LOGIN_URL, data)
 }

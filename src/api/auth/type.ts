@@ -1,5 +1,5 @@
 // 登陆表单
-export interface loginForm {
+export interface loginData {
   username: string
   password: string
 }
@@ -14,5 +14,6 @@ interface dataType {
 // 登陆返回数据
 export interface loginResponseData {
   code: number
+  msg: string
   data: dataType
 }
