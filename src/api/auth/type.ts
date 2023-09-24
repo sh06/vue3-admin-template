@@ -5,7 +5,7 @@ export interface loginData {
 }
 
 // 登陆返回数据格式
-interface dataType {
+export interface dataType {
   token: string
   username: string
   user_id: string

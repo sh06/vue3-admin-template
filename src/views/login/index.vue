@@ -28,17 +28,21 @@ if (userStore.token) {
 }
 
 const doLogin = (formEl: FormInstance) => {
-  formEl.validate((valid) => {
+  formEl.validate(async (valid) => {
     if (valid) {
       const data: loginData = {
         username: loginForm.username,
         password: loginForm.password
       }
-      userStore.userLogin(data).then((res) => {
-        if (res.code == 1) {
-          router.push('/')
-        }
-      })
+
+      userStore
+        .userLogin(data)
+        .then((res) => {
+          if (res.code == 1) {
+            router.push('/')
+          }
+        })
+        .catch(() => {})
     }
   })
 }

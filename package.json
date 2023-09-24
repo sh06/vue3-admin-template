@@ -6,7 +6,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build:development": "pnpm type-check && vite build --mode=development",
+    "build:test": "pnpm type-check && vite build --mode=test",
     "build:production": "pnpm type-check && vite build --mode=production",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "run-p lint:stylelint lint:eslint lint:prettier",

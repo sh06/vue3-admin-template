@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { reqLogin } from '@/api/auth'
-import type { loginData } from '@/api/auth/type'
+import type { loginData, loginResponseData } from '@/api/auth/type'
+import { setToken } from '@/utils/auth'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -10,15 +11,26 @@ export const useUserStore = defineStore('user', {
   }),
   getters: {},
   actions: {
-    async userLogin(data: loginData) {
-      const result = await reqLogin(data)
-      this.token = result.data.token
-      this.user_id = result.data.user_id
-      this.username = result.data.username
-      localStorage.setItem('token', result.data.token)
-      localStorage.setItem('user_id', result.data.user_id)
-      localStorage.setItem('username', result.data.username)
-      return result
+    SET_USERNAME(username: string) {
+      this.username = username
+    },
+    SET_USER_ID(userId: string) {
+      this.user_id = userId
+    },
+    SET_TOKEN(token: string) {
+      this.token = token
+    },
+    userLogin(data: loginData) {
+      return new Promise<loginResponseData>((resolve, reject) => {
+        reqLogin(data)
+          .then((rst) => {
+            setToken(rst.data)
+            resolve(rst)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
     }
   }
 })
