@@ -23,10 +23,6 @@ const loginFormRules = {
 
 let userStore = useUserStore()
 
-if (userStore.token) {
-  router.push('/')
-}
-
 const doLogin = (formEl: FormInstance) => {
   formEl.validate(async (valid) => {
     if (valid) {

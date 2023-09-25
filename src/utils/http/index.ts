@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken, clearToken } from '../auth'
 import router from '@/router'
 
 const http = axios.create({
@@ -8,7 +9,24 @@ const http = axios.create({
 
 /** 请求拦截器 */
 http.interceptors.request.use((config) => {
-  return config
+  const whiteList = ['/login']
+
+  if (
+    whiteList.find((url) => {
+      return url === config.url
+    })
+  ) {
+    return config
+  } else {
+    return new Promise((resolve) => {
+      const token = getToken()
+
+      if (token) {
+        config.headers['token'] = token
+      }
+      resolve(config)
+    })
+  }
 })
 
 /** 响应拦截器 */
@@ -27,24 +45,18 @@ http.interceptors.response.use(
   (error) => {
     const httpCode = error.response.status
 
-    if (httpCode == 403) {
-      error.message = '拒绝访问'
-      router.push('/error/403')
-    } else if (httpCode == 404) {
-      error.message = '请求不存在'
-      router.push('/error/404')
-    } else if (httpCode == 500) {
-      error.message = '请求不存在'
-      router.push('/error/404')
+    if (httpCode == 401) {
+      clearToken()
+      error.message = '请重新登录'
+      router.push('/login')
     } else {
       error.message = '请求错误，请稍后再试。'
-      ElMessage({
-        showClose: true,
-        message: error.message,
-        type: 'error'
-      })
     }
-
+    ElMessage({
+      showClose: true,
+      message: error.message,
+      type: 'error'
+    })
     return Promise.reject(error)
   }
 )

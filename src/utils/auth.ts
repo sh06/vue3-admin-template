@@ -9,3 +9,14 @@ export function setToken(data: dataType) {
   localStorage.setItem('user_id', data.user_id)
   localStorage.setItem('username', data.username)
 }
+
+export function getToken() {
+  return useUserStore().token
+}
+
+export function clearToken() {
+  useUserStore().SET_TOKEN('')
+  useUserStore().SET_USER_ID('')
+  useUserStore().SET_USERNAME('')
+  localStorage.clear()
+}
