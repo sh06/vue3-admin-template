@@ -4,6 +4,7 @@ export default {
   path: '/',
   name: 'home',
   redirect: '/dashboard',
+  component: () => import('@/layout/index.vue'),
   children: [
     {
       path: '/dashboard',

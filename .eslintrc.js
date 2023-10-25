@@ -8,8 +8,11 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-essential',
     'plugin:prettier/recommended',
-    '.eslintrc-auto-import.json'
+    './.eslintrc-auto-import.json'
   ],
+  globals: {
+    ElMessageBox: 'readonly'
+  },
   overrides: [
     {
       env: {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken, clearToken } from '../auth'
+import { getAuthToken, clearAuthToken } from '../auth'
 import router from '@/router'
 
 const http = axios.create({
@@ -19,7 +19,7 @@ http.interceptors.request.use((config) => {
     return config
   } else {
     return new Promise((resolve) => {
-      const token = getToken()
+      const token = getAuthToken()
 
       if (token) {
         config.headers['token'] = token
@@ -46,7 +46,7 @@ http.interceptors.response.use(
     const httpCode = error.response.status
 
     if (httpCode == 401) {
-      clearToken()
+      clearAuthToken()
       error.message = '请重新登录'
       router.push('/login')
     } else {
