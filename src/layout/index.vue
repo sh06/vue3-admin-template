@@ -28,7 +28,7 @@ const logout = () => {
 
 // 点击退出弹出模态对话框
 const openLogout = () => {
-  ElMessageBox.confirm('确定要退出吗?', 'Confirm', {
+  ElMessageBox.confirm('确定要退出吗?', '注意', {
     distinguishCancelAndClose: true,
     confirmButtonText: '确定',
     cancelButtonText: '取消'
@@ -37,6 +37,16 @@ const openLogout = () => {
       logout()
     })
     .catch(() => {})
+}
+
+// 跳转到个人信息页
+const jumpToProfile = () => {
+  router.push('/profile')
+}
+
+// 跳转到更改密码页
+const jumpToResetPassword = () => {
+  router.push('/resetPassword')
 }
 </script>
 
@@ -88,8 +98,8 @@ const openLogout = () => {
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>账户信息</el-dropdown-item>
-                  <el-dropdown-item>修改密码</el-dropdown-item>
+                  <el-dropdown-item @click="jumpToProfile()">账户信息</el-dropdown-item>
+                  <el-dropdown-item @click="jumpToResetPassword()">修改密码</el-dropdown-item>
                   <el-dropdown-item divided @click="openLogout()">退出</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
