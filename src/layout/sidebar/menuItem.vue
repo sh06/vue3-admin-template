@@ -4,7 +4,10 @@ defineProps(['menuList'])
 
 <template>
   <template v-for="item in menuList" :key="item.route">
-    <el-menu-item v-if="!item.children" :index="item.route">{{ item.name }}</el-menu-item>
+    <el-menu-item v-if="!item.children" :index="item.route">
+      <el-icon><icon-svg :name="item.icon"></icon-svg></el-icon>
+      <span>{{ item.name }}</span>
+    </el-menu-item>
     <el-sub-menu v-if="item.children" :index="item.route">
       <template #title>
         <el-icon><icon-svg :name="item.icon"></icon-svg></el-icon>

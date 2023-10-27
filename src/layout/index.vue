@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import setting from '@/setting'
-import router from '@/router'
 import menuItem from '@/layout/sidebar/menuItem.vue'
+import topbar from '@/layout/header/topbar.vue'
+import router from '@/router'
 import { useUserStore } from '@/stores/modules/user'
-import { clearAuthToken } from '@/utils/auth'
 
 let loading = ref(false)
 let userStore = useUserStore()
@@ -12,42 +12,8 @@ const menu = userStore.menu
 const logo = setting.logo
 const sidebarIsCollapse = ref(false)
 
-// 退出调用接口清空cookie
-const logout = () => {
-  loading.value = true
-  userStore
-    .userLogout()
-    .then((res) => {
-      if (res.code == 1) {
-        clearAuthToken()
-        router.push('/login')
-      }
-    })
-    .catch(() => {})
-}
-
-// 点击退出弹出模态对话框
-const openLogout = () => {
-  ElMessageBox.confirm('确定要退出吗?', '注意', {
-    distinguishCancelAndClose: true,
-    confirmButtonText: '确定',
-    cancelButtonText: '取消'
-  })
-    .then(() => {
-      logout()
-    })
-    .catch(() => {})
-}
-
-// 跳转到个人信息页
-const jumpToProfile = () => {
-  router.push('/profile')
-}
-
-// 跳转到更改密码页
-const jumpToResetPassword = () => {
-  router.push('/resetPassword')
-}
+// 设置侧边菜单的 key，当 key 值发生变化的时候组件刷新
+let menuKey = ref(1)
 </script>
 
 <template>
@@ -56,8 +22,9 @@ const jumpToResetPassword = () => {
       <el-aside class="layout_sidebar">
         <el-scrollbar>
           <el-menu
+            :key="menuKey"
             :collapse-transition="true"
-            default-active="1"
+            :default-active="router.currentRoute.value.fullPath"
             :collapse="sidebarIsCollapse"
             class="layout_sidebar_menu"
             router
@@ -78,33 +45,13 @@ const jumpToResetPassword = () => {
       </el-aside>
       <el-container class="layout_content">
         <el-header class="layout_content_header">
-          <div class="layout_content_header_left">
-            <div @click="sidebarIsCollapse = !sidebarIsCollapse">
-              <el-icon :size="20" class="el-icon--right" v-if="sidebarIsCollapse">
-                <i-ep-expand />
-              </el-icon>
-              <el-icon :size="20" class="el-icon--right" v-if="!sidebarIsCollapse">
-                <i-ep-fold />
-              </el-icon>
-            </div>
-          </div>
-          <div class="layout_content_header_right">
-            <el-dropdown popper-class="layout_content_header_right_user">
-              <span class="el-dropdown-link layout_content_header_right_user_name">
-                {{ userName }}
-                <el-icon class="el-icon--right">
-                  <i-ep-arrow-down />
-                </el-icon>
-              </span>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item @click="jumpToProfile()">账户信息</el-dropdown-item>
-                  <el-dropdown-item @click="jumpToResetPassword()">修改密码</el-dropdown-item>
-                  <el-dropdown-item divided @click="openLogout()">退出</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </div>
+          <topbar
+            v-model:collapse="sidebarIsCollapse"
+            v-model:menukey="menuKey"
+            v-model:loading="loading"
+            :user-name="userName"
+            :user-store="userStore"
+          ></topbar>
         </el-header>
         <el-main class="layout_content_main">
           <el-scrollbar class="layout_content_main_scroll">
@@ -147,39 +94,6 @@ const jumpToResetPassword = () => {
       justify-content: space-between;
       padding: 0;
       box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
-
-      // 顶部左侧logo与工具区
-      &_left {
-        display: flex;
-        align-items: center;
-        height: $layout-header-height;
-        background: white;
-      }
-
-      &_left div {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        padding: 0 4px;
-        cursor: pointer;
-      }
-
-      // 顶部右侧
-      &_right {
-        display: flex;
-        align-items: center;
-        height: $layout-header-height;
-        padding: 0 14px;
-        background: white;
-
-        &_user {
-          &_name {
-            display: flex;
-            align-items: center;
-            height: $layout-header-height;
-          }
-        }
-      }
     }
 
     &_main {

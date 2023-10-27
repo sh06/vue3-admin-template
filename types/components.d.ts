@@ -32,6 +32,8 @@ declare module 'vue' {
     IEpDocument: typeof import('~icons/ep/document')['default']
     IEpExpand: typeof import('~icons/ep/expand')['default']
     IEpFold: typeof import('~icons/ep/fold')['default']
+    IEpHome: typeof import('~icons/ep/home')['default']
+    IEpHouse: typeof import('~icons/ep/house')['default']
     IEpLocation: typeof import('~icons/ep/location')['default']
     IEpMenu: typeof import('~icons/ep/menu')['default']
     IEpSetting: typeof import('~icons/ep/setting')['default']
