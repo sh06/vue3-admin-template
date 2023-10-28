@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import router from '@/router'
 import { clearAuthToken } from '@/utils/auth'
+import breadcrumb from '@/layout/header/breadcrumb.vue'
 
-const props = defineProps(['userName', 'collapse', 'loading', 'userStore', 'menukey'])
-const emit = defineEmits(['update:collapse', 'update:loading', 'update:menukey'])
-let menuKeyValue = ref(props.menukey)
+const props = defineProps(['userName', 'collapse', 'loading', 'userStore', 'menuKey'])
+const emit = defineEmits(['update:collapse', 'update:loading', 'update:menuKey'])
+let menuKeyValue = ref(props.menuKey)
 
 // 退出调用接口清空cookie
 const logout = () => {
@@ -33,21 +34,21 @@ const openLogout = () => {
     .catch(() => {})
 }
 
-// 自增 menuKey，不能 menuKeyValue++，因为会先更新原来的值，然后才自增
-const incrMenuKey = () => {
-  emit('update:menukey', ++menuKeyValue.value)
+// 不能 menuKeyValue.value++，因为会先更新原来的值到父组件，然后才自增
+const updateMenuKey = () => {
+  emit('update:menuKey', ++menuKeyValue.value)
 }
 
 // 跳转到个人信息页
 const jumpToProfile = () => {
-  incrMenuKey()
-  router.push('/profile')
+  updateMenuKey()
+  router.push('/account/profile')
 }
 
 // 跳转到更改密码页
 const jumpToResetPassword = () => {
-  incrMenuKey()
-  router.push('/resetPassword')
+  updateMenuKey()
+  router.push('/account/resetPassword')
 }
 </script>
 
@@ -60,6 +61,9 @@ const jumpToResetPassword = () => {
       <el-icon :size="20" class="el-icon--right" v-if="!props.collapse">
         <i-ep-fold />
       </el-icon>
+    </div>
+    <div>
+      <breadcrumb></breadcrumb>
     </div>
   </div>
   <div class="layout_content_header_right">

@@ -5,21 +5,17 @@ export default {
   name: 'home',
   redirect: '/dashboard',
   component: () => import('@/layout/index.vue'),
+  meta: {
+    title: '首页'
+  },
   children: [
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('@/views/home/dashboard.vue')
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: () => import('@/views/home/profile.vue')
-    },
-    {
-      path: '/resetPassword',
-      name: 'resetPassword',
-      component: () => import('@/views/home/resetPassword.vue')
+      component: () => import('@/views/home/dashboard.vue'),
+      meta: {
+        title: '首页'
+      }
     }
   ]
 } as RouteConfig

@@ -11,9 +11,18 @@ const userName = userStore.username
 const menu = userStore.menu
 const logo = setting.logo
 const sidebarIsCollapse = ref(false)
-
+const currentInstance = getCurrentInstance()
 // 设置侧边菜单的 key，当 key 值发生变化的时候组件刷新
 let menuKey = ref(1)
+let menuRef = ref(null)
+
+watch(menuKey, () => {
+  for (const item of menu) {
+    if (item.children) {
+      currentInstance?.refs?.menuRef?.close(item.route)
+    }
+  }
+})
 </script>
 
 <template>
@@ -22,7 +31,7 @@ let menuKey = ref(1)
       <el-aside class="layout_sidebar">
         <el-scrollbar>
           <el-menu
-            :key="menuKey"
+            ref="menuRef"
             :collapse-transition="true"
             :default-active="router.currentRoute.value.fullPath"
             :collapse="sidebarIsCollapse"
@@ -47,7 +56,7 @@ let menuKey = ref(1)
         <el-header class="layout_content_header">
           <topbar
             v-model:collapse="sidebarIsCollapse"
-            v-model:menukey="menuKey"
+            v-model:menu-key="menuKey"
             v-model:loading="loading"
             :user-name="userName"
             :user-store="userStore"

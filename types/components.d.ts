@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElAside: typeof import('element-plus/es')['ElAside']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -33,6 +35,7 @@ declare module 'vue' {
     IEpExpand: typeof import('~icons/ep/expand')['default']
     IEpFold: typeof import('~icons/ep/fold')['default']
     IEpHome: typeof import('~icons/ep/home')['default']
+    IEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     IEpHouse: typeof import('~icons/ep/house')['default']
     IEpLocation: typeof import('~icons/ep/location')['default']
     IEpMenu: typeof import('~icons/ep/menu')['default']
