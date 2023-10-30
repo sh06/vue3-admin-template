@@ -14,7 +14,8 @@ export default {
       name: 'dashboard',
       component: () => import('@/views/home/dashboard.vue'),
       meta: {
-        title: '首页'
+        title: '首页',
+        isMenu: true
       }
     }
   ]

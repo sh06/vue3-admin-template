@@ -2,7 +2,7 @@
 import setting from '@/setting'
 import menuItem from '@/layout/sidebar/menuItem.vue'
 import topbar from '@/layout/header/topbar.vue'
-import router from '@/router'
+import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/modules/user'
 
 let loading = ref(false)
@@ -16,6 +16,20 @@ const currentInstance = getCurrentInstance()
 let menuKey = ref(1)
 let menuRef = ref(null)
 
+// 计算侧边栏菜单打开的菜单
+const activeMenu = computed(() => {
+  let active = ref('')
+  let menuMatche = useRoute().matched
+  for (const item of menuMatche) {
+    if (item.meta.isMenu == true) {
+      active.value = item.path
+    }
+  }
+
+  return active.value
+})
+
+// 监听 menuKey 的变化来关闭所有的菜单
 watch(menuKey, () => {
   for (const item of menu) {
     if (item.children) {
@@ -33,7 +47,7 @@ watch(menuKey, () => {
           <el-menu
             ref="menuRef"
             :collapse-transition="true"
-            :default-active="router.currentRoute.value.fullPath"
+            :default-active="activeMenu"
             :collapse="sidebarIsCollapse"
             class="layout_sidebar_menu"
             router

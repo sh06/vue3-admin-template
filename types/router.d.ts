@@ -10,6 +10,8 @@ interface RouteMetaConfig {
   show?: boolean
   // 菜单排序 可选 小的在上边
   rank?: number
+  // 是否是菜单
+  isMenu?: boolean
 }
 
 // 一级路由定义

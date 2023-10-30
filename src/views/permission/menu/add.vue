@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>permission - menu</div>
+  <div>permission - menu - add</div>
 </template>

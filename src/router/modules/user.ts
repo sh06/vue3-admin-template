@@ -14,7 +14,8 @@ export default {
       name: 'userBackend',
       component: () => import('@/views/user/backend.vue'),
       meta: {
-        title: '后台用户管理'
+        title: '后台用户管理',
+        isMenu: true
       }
     },
     {
@@ -22,7 +23,8 @@ export default {
       name: 'userCustomer',
       component: () => import('@/views/user/customer.vue'),
       meta: {
-        title: '客户端用户管理'
+        title: '客户端用户管理',
+        isMenu: true
       }
     }
   ]
