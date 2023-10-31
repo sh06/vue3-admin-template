@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/modules/user'
 import exceptRoute from './modules/except'
+import { nprogressStart, nprogressDone } from '@/plugins/nprogress'
 
 const modules: Record<string, any> = import.meta.glob(
   ['./modules/**/*.ts', '!./modules/**/except.ts'],
@@ -26,6 +27,7 @@ const router = createRouter({
 const whiteList = ['/login']
 
 router.beforeEach((to, from, next) => {
+  nprogressStart()
   const token = useUserStore().token
   if (token) {
     if (to.path == '/login') {
@@ -44,6 +46,10 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
+})
+
+router.afterEach(() => {
+  nprogressDone()
 })
 
 export default router
