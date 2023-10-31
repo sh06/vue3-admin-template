@@ -6,7 +6,7 @@ export default {
   redirect: '/account/profile',
   component: () => import('@/layout/index.vue'),
   meta: {
-    title: '个人账户'
+    title: '账户'
   },
   children: [
     {

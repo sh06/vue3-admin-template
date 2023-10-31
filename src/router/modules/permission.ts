@@ -43,7 +43,8 @@ export default {
       component: () => import('@/views/permission/index.vue'),
       redirect: '/permission/role/index',
       meta: {
-        title: '角色管理'
+        title: '角色管理',
+        isMenu: true
       },
       children: [
         {

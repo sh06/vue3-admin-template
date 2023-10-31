@@ -1,10 +1,23 @@
 <script setup lang="ts">
 import router from '@/router'
 import { clearAuthToken } from '@/utils/auth'
-import breadcrumb from '@/layout/header/breadcrumb.vue'
+import breadcrumb from '@/layout/component/header/breadcrumb.vue'
+import { FullScreen, Refresh } from '@element-plus/icons-vue'
 
-const props = defineProps(['userName', 'collapse', 'loading', 'userStore', 'menuKey'])
-const emit = defineEmits(['update:collapse', 'update:loading', 'update:menuKey'])
+const props = defineProps([
+  'userName',
+  'collapse',
+  'loading',
+  'userStore',
+  'menuKey',
+  'routerViewKey'
+])
+const emit = defineEmits([
+  'update:collapse',
+  'update:loading',
+  'update:menuKey',
+  'update:routerViewKey'
+])
 let menuKeyValue = ref(props.menuKey)
 
 // 退出调用接口清空cookie
@@ -50,6 +63,22 @@ const jumpToResetPassword = () => {
   updateMenuKey()
   router.push('/account/resetPassword')
 }
+
+const refresh = () => {
+  emit('update:routerViewKey', false)
+}
+
+const fullScreen = () => {
+  // 这个属性判断当前是否是全屏模式 true是全屏 false不是
+  let full = document.fullscreenElement
+  if (!full) {
+    // 实现全屏
+    document.documentElement.requestFullscreen()
+  } else {
+    // 退出全屏模式
+    document.exitFullscreen()
+  }
+}
 </script>
 
 <template>
@@ -67,6 +96,16 @@ const jumpToResetPassword = () => {
     </div>
   </div>
   <div class="layout_content_header_right">
+    <div class="layout_content_header_right_tool">
+      <el-button :circle="true" size="small" :icon="Refresh" title="刷新页面" @click="refresh" />
+      <el-button
+        :circle="true"
+        size="small"
+        :icon="FullScreen"
+        title="全屏显示与退出"
+        @click="fullScreen"
+      />
+    </div>
     <el-dropdown popper-class="layout_content_header_right_user">
       <span class="el-dropdown-link layout_content_header_right_user_name">
         {{ props.userName }}
@@ -109,6 +148,10 @@ const jumpToResetPassword = () => {
   height: $layout-header-height;
   padding: 0 14px;
   background: white;
+
+  &_tool {
+    margin-right: 10px;
+  }
 
   &_user {
     &_name {
