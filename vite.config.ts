@@ -70,6 +70,9 @@ export default defineConfig(({ mode }) => {
           rewrite: (url) => url.replace(RegExp(`^${env.VITE_APP_BASE_API}`), '')
         }
       }
+    },
+    build: {
+      outDir: env.VITE_APP_BUILD_DIR
     }
   }
 })
