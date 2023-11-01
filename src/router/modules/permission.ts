@@ -6,7 +6,8 @@ export default {
   redirect: '/permission/menu/index',
   component: () => import('@/layout/index.vue'),
   meta: {
-    title: '权限管理'
+    title: '权限管理',
+    permission_id: 'PERMISSION'
   },
   children: [
     {
@@ -16,7 +17,8 @@ export default {
       component: () => import('@/views/permission/index.vue'),
       meta: {
         title: '菜单管理',
-        isMenu: true
+        isMenu: true,
+        permission_id: 'PERMISSION_NODE'
       },
       children: [
         {
@@ -24,7 +26,8 @@ export default {
           name: 'permissionRoleList',
           component: () => import('@/views/permission/menu/index.vue'),
           meta: {
-            title: '菜单列表'
+            title: '菜单列表',
+            permission_id: 'PERMISSION_NODE_LIST'
           }
         },
         {
@@ -32,7 +35,8 @@ export default {
           name: 'permissionRoleAdd',
           component: () => import('@/views/permission/menu/add.vue'),
           meta: {
-            title: '添加菜单'
+            title: '添加菜单',
+            permission_id: 'PERMISSION_NODE_ADD'
           }
         }
       ]
@@ -44,7 +48,8 @@ export default {
       redirect: '/permission/role/index',
       meta: {
         title: '角色管理',
-        isMenu: true
+        isMenu: true,
+        permission_id: 'PERMISSION_ROLE'
       },
       children: [
         {
@@ -52,7 +57,8 @@ export default {
           name: 'permissionRoleIndex',
           component: () => import('@/views/permission/role/index.vue'),
           meta: {
-            title: '角色列表'
+            title: '角色列表',
+            permission_id: 'PERMISSION_ROLE_LIST'
           }
         }
       ]

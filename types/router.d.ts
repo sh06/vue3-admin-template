@@ -12,6 +12,8 @@ interface RouteMetaConfig {
   rank?: number
   // 是否是菜单
   isMenu?: boolean
+  // 权限ID
+  permission_id?: string
 }
 
 // 一级路由定义

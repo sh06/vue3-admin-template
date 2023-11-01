@@ -6,7 +6,8 @@ export default {
   redirect: '/user/backend',
   component: () => import('@/layout/index.vue'),
   meta: {
-    title: '用户管理'
+    title: '用户管理',
+    permission_id: 'USER'
   },
   children: [
     {
@@ -15,7 +16,8 @@ export default {
       component: () => import('@/views/user/backend.vue'),
       meta: {
         title: '后台用户管理',
-        isMenu: true
+        isMenu: true,
+        permission_id: 'USER_BACKEND'
       }
     },
     {
@@ -24,7 +26,8 @@ export default {
       component: () => import('@/views/user/customer.vue'),
       meta: {
         title: '客户端用户管理',
-        isMenu: true
+        isMenu: true,
+        permission_id: 'USER_CUSTOMER'
       }
     }
   ]
